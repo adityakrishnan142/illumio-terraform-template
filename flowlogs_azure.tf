@@ -1,8 +1,11 @@
 
-resource "azurerm_network_watcher" "NetWatcher" {
+
+
+# Use existing Network Watcher instead of creating a new one
+# Azure allows only 1 Network Watcher per subscription per region
+data "azurerm_network_watcher" "NetWatcher" {
   name                = "NetworkWatcher_westus"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = "NetworkWatcherRG"
 }
 
 resource "random_string" "random" {
